@@ -1,0 +1,80 @@
+<idea-plugin>
+    <id>com.xiaocx.power</id>
+    <name>SnowAndRain</name>
+    <version>0.2.0</version>
+    <vendor email="" url="https://github.com/xionghuiyong/activate-power-mode">
+        xionghuiyong
+    </vendor>
+
+    <description>
+        <![CDATA[
+          <ul>
+			<li>SnowAndRain plugin like atom</li>
+			<li>Fix defects and update api</li>
+			<li>Forked from https://github.com/SinarPandora/activate-power-mode, Thanks to the original author!!</li>
+		  </ul>
+        ]]>
+    </description>
+
+    <change-notes>
+        <![CDATA[
+        <h3>v0.2</h3>
+        <ul>
+        <li>更新 API</li>
+        <li>更新雨夹雪的场景，支持雨雪比例设置</li>
+        <li>Update API</li>
+        <li>Update rain and snow mixed, sleet scene</li>
+        </ul>
+        <h3>v0.1</h3>
+        <ul>
+        <li>更新 API</li>
+        <li>Update API</li>
+        </ul>
+        ]]>
+    </change-notes>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+    <idea-version since-build="202.6397.94"/>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+    <depends>com.intellij.modules.lang</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationService serviceImplementation="com.power.config.Config"/>
+        <applicationConfigurable instance="com.power.ui.Setting"/>
+    </extensions>
+
+    <applicationListeners>
+        <listener class="com.power.listener.ActivatePowerModeProjectListener" topic="com.intellij.openapi.project.ProjectManagerListener"/>
+    </applicationListeners>
+
+    <actions>
+        <group id="ActivatePowerModeGroup" popup="true"
+               text="Activate Power Mode!">
+            <add-to-group group-id="WindowMenu" anchor="first"/>
+
+            <action id="ActivatePowerEnable" class="com.power.action.ActivatePowerEnableAction"
+                    text="Enable"
+                    description="Enable">
+                <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt A"/>
+            </action>
+
+            <action id="ParticleSwitch" class="com.power.action.ParticleSwitchAction"
+                    text="Particle"
+                    description="Particle">
+                <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt P"/>
+            </action>
+
+            <action id="ColorfulSwitch" class="com.power.action.ColorfulSwitchAction"
+                    text="Colorful"
+                    description="Colorful"/>
+
+        </group>
+
+    </actions>
+
+</idea-plugin>
